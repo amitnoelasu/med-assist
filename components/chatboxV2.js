@@ -26,7 +26,8 @@ export const ChatBoxV2 = () => {
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef(null);
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
+    e.preventDefault();
     if (message.trim()) {
       const newMessage = { role: "user", content: [{ text: message }] };
       setMessages([...messages, newMessage]);
@@ -144,7 +145,7 @@ export const ChatBoxV2 = () => {
           ))}
           <div ref={messagesEndRef} />
         </Stack>
-
+        <form onSubmit={sendMessage} style={{ width: "100%" }}>
         <Stack direction="row" spacing={2} mt={2}>
           <TextField
             label="Type your message..."
@@ -173,7 +174,8 @@ export const ChatBoxV2 = () => {
             }}
           />
           <Button
-            variant="contained"
+           
+            type="submit"
             onClick={sendMessage}
             sx={{
               bgcolor: "#FF4C4C",
@@ -187,6 +189,7 @@ export const ChatBoxV2 = () => {
             Send
           </Button>
         </Stack>
+        </form>
       </Box>
   );
 };
